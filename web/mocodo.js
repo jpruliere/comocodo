@@ -292,29 +292,6 @@ function arrange(event, algo) {
     }
   });
 };
-function reveal(event) {
-  if (!preconditions()) return;
-  request_lock = true
-  $.ajax({
-    type: "POST",
-    url: "web/unbox.php",
-    data: { title: $("#title").attr("value") },
-    success: function (result) {
-      if (result) {
-        $("#text").val(result);
-        $("#text").scrollTop(0);
-        markAsDirty();
-        if (!$("#diagramOutput").hasClass('initial')) {
-          request_lock = false;
-          generate();
-        }
-      }
-    },
-    complete: function(data) {
-      request_lock = false;
-    }
-  });
-};
 function markAsDirty() {
   $("#state").val("dirty");
   $("#geoTab").fadeOut();
